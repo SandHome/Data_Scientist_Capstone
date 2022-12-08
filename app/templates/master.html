@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Dog breed classifier</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Data Science Capstone</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="text-center">Predict Dog Breed</h1>
+            <hr />
+            <div class="border border-info" style="width:100%;">
+                <div style="width:50%; margin-top: 30px; display: block; margin-left: auto; margin-right: auto">
+                    <h3 class="text-center">Overview of Training Dataset</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Epochs</td>
+                                <td>{{EpochsNum}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Test accuracy</td>
+                                <td>{{TestAccuracy}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <h2 class="text-center">Given an image of a human or a dog</h2>
+            <div class="row col-lg-12 form-group-lg">
+                <form class="file-form" action="/go" method="post" , enctype="multipart/form-data">
+                    <input class="file-form-input form-control form-control-lg" type="file" , name="imageFile" />
+                    <button class="btn btn-success btn-lg col-lg-offset-5"
+                        style="text-align: center; margin-top: 10px;">Identify the resembling dog breed</button>
+                </form>
+            </div>
+            <p class="text-center" style="text-align: center; margin-top: 30px; color: red">
+                {{status}}
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="ResultClass" style="display:none; margin-top: 30px;">
+            <div class="border border-info" style="width:100%;">
+                <div style="width:50%; margin-top: 30px; display: block; margin-left: auto; margin-right: auto">
+                    <h3 class="text-center">Result</h3>
+                    <table class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Identification</td>
+                                <td>{{Identification}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Dog breed</td>
+                                <td>{{DogBreed}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <img style="width:100%; margin-top: 30px;" class="ImgClass" src="{{ url_for('display_image', filename=result_image)}}" alt="Result Image">
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const check = document.querySelector('.ImgClass').src;
+
+        $(document).ready(function () {
+            DisplayResuft();
+        });
+        function DisplayResuft() {
+            console.log(check)
+            if (check.includes('ResultOut')) {
+                document.querySelector('.ResultClass').style.display = "";
+            }
+            else {
+                document.querySelector('.ResultClass').style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
