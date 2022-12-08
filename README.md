@@ -1,8 +1,11 @@
 <h1 align="center">Data Scientist Capstone Project</h1>
 <h2 align="center">Dog Breed Classifier</h2>
+
 ![Dog Breed Classifier - WebApp](WebApp.png)
 
  With this project, we know how to uses Convolutional Neural Networks (CNNs)!, how to build a pipeline to process real-world, user-supplied images, algorithm identify an estimate of the canine’s breed. If supplied an image of a human, it will identify the resembling dog breed.
+
+ Please see dog_app.ipynb for more details.
 
 ## Instructions:
 1. Run the following commands in the Data folder of this project to install libraries. ( pip install -r requirements/requirements-gpu.txt )
